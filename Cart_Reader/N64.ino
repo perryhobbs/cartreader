@@ -266,7 +266,7 @@ void n64CartMenu() {
       compareCRC("n64.txt", 0, 1, 0);
 #else
       // Dumping ROM fast
-      compareCRC("n64.txt", readRom_N64(), 1, 0);
+      compareCRC("n64.txt", readRom_N64_fast(), 1, 0);
 #endif
 
 #ifdef ENABLE_GLOBAL_LOG
@@ -2974,7 +2974,7 @@ void readRom_N64() {
 }
 #else
 // dumping rom fast
-uint32_t readRom_N64() {
+uint32_t readRom_N64_fast() {
   // Get name, add extension and convert to char array for sd lib
   createFolder("N64", "ROM", romName, "Z64");
 

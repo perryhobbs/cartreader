@@ -1075,12 +1075,12 @@ void print_MissingModule(void) {
 /******************************************
   Main menu
 *****************************************/
-constexpr char modeItem1[] PROGMEM = "Game Boy";
+constexpr char modeItem1[] PROGMEM = "Game Boy (GB/GBC/GBA)";
 constexpr char modeItem2[] PROGMEM = "NES/Famicom";
-constexpr char modeItem3[] PROGMEM = "Super Nintendo/SFC";
-constexpr char modeItem4[] PROGMEM = "Nintendo 64 (3V)";
-constexpr char modeItem5[] PROGMEM = "Mega Drive/Genesis";
-constexpr char modeItem6[] PROGMEM = "SMS/GG/MIII/SG-1000";
+constexpr char modeItem3[] PROGMEM = "SNES/SFC";
+constexpr char modeItem4[] PROGMEM = "N64";
+constexpr char modeItem5[] PROGMEM = "Sega Mega Drive/Genesis";
+constexpr char modeItem6[] PROGMEM = "Sega Master System";
 constexpr char modeItem7[] PROGMEM = "PC Engine/TG16";
 constexpr char modeItem8[] PROGMEM = "WonderSwan (3V)";
 constexpr char modeItem9[] PROGMEM = "NeoGeo Pocket (3V)";

@@ -5,67 +5,65 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-/***** FIRMWARE CONFIGURATION **************************************
+// Hardware Version
+#define HW5
 
-    Add or remove the "//" in front of items to toggle them.
+/*==== HARDWARE CONFIG ===========================================*/
 
-    Disabled:
-      //#define HW5
+// Automatic Voltage (hardware modification is required to change this setting)
+#define ENABLE_VSELECT
 
-    Enabled:
-      #define HW5
+// 3.3V Stability Fix (for use with VSELECT)
+// The 2560 is only designed to run at 16MHz at 5V. It is only rated for 8MHz at 3.3V.
+// This option lowers the clock to the rated 8MHz when voltage is 3.3V.
+// More info: https://github.com/sanni/cartreader/issues/870
+#define ENABLE_3V3FIX
 
-    Things in ** blocks like this are comments. Changing them doesn't
-    affect the firmware that is flashed to your OSCR.
-
-    If you only get a blank screen or "Press Button" message after
-    flashing you have enabled too many modules.
-
-********************************************************************/
-
-/*==== HARDWARE VERSION ===========================================*/
-
-/*
-    Choose your hardware version:
-*/
-
-//#define HW5
-//#define HW4
-//#define HW3
-//#define HW2
-//#define HW1
-//#define SERIAL_MONITOR
-
-/****/
-
-/*==== HARDWARE MODULES ===========================================*/
-
-/* [ Automatic Voltage Selection ---------------------------------- ]
-    Enable this if you have the VSELECT module.
-*/
-
-//#define ENABLE_VSELECT
-
-/****/
-
-/* [ Clock Generator ---------------------------------------------- ]
-    Disable this if you don't have the clock generator module. 
-*/
-
+// Clock Generator
 #define ENABLE_CLOCKGEN
 
-/****/
+// Real Time Clock
+#define ENABLE_RTC
+#define DS3231
 
-/* [ Real Time Clock ---------------------------------------------- ]
-    Enable this if you have the RTC module. You can configure the
-    type later in this file.
+// Nintendo Game Boy (GB, GBC, GBA)
+#define ENABLE_GBX
+
+// Nintendo Entertainment System (NES) / Famicom (FC)
+#define ENABLE_NES
+
+// Super Nintendo Entertainment System (SNES) / Super Famicom (SFC)
+#define ENABLE_SNES
+
+// Nintendo 64 (N64) & Controller Pak
+#define ENABLE_N64
+#define ENABLE_CONTROLLERTEST
+
+// Sega Genesis / Mega Drive
+#define ENABLE_MD
+
+// Sega Master System (SMS) / Mark III / Game Gear / SG-1000
+#define ENABLE_SMS
+
+/*==== USER CONFIG ===========================================*/
+
+// Default LCD Color (Green, Red, Blue)
+#define OPTION_LCD_BG_COLOR 100, 0, 0
+
+/* [ Config File -------------------------------------------------- ]
+    Allow changing some configuration values via a config file.
+    Can be set in config.txt on the SD card. Example:
+      lcd.confColor=1
+      lcd.red=0
+      lcd.green=0
+      lcd.blue=100
 */
+#define ENABLE_CONFIG
 
-//#define ENABLE_RTC
+// Disable to sort files/folders from oldest to newest
+#define OPTION_REVERSE_SORT
 
-/****/
-
-/*==== GAME SYSTEM CORES ==========================================*/
+/*==== OTHER GAME SYSTEM CORES ==========================================*/
 
 /* [ Atari 2600 --------------------------------------------------- ]
 */
@@ -193,13 +191,6 @@
 
 /****/
 
-/* [ Game Boy (Color) and Advance --------------------------------- ]
-*/
-
-#define ENABLE_GBX
-
-/****/
-
 /* [ Intellivision ------------------------------------------------ ]
 */
 
@@ -218,21 +209,6 @@
 */
 
 //#define ENABLE_NGP
-
-/****/
-
-/* [ Nintendo 64 -------------------------------------------------- ]
-*/
-
-#define ENABLE_N64
-//#define ENABLE_CONTROLLERTEST
-
-/****/
-
-/* [ Nintendo Entertainment System/Family Computer ---------------- ]
-*/
-
-#define ENABLE_NES
 
 /****/
 
@@ -271,20 +247,6 @@
 
 /****/
 
-/* [ Sega Master System/Mark III/Game Gear/SG-1000 ---------------- ]
-*/
-
-#define ENABLE_SMS
-
-/****/
-
-/* [ Sega Mega Drive/Genesis -------------------------------------- ]
-*/
-
-#define ENABLE_MD
-
-/****/
-
 /* [ Super Famicom SF Memory Cassette (needs ENABLE_SNES)---------- ]
 */
 
@@ -310,13 +272,6 @@
 */
 
 //#define ENABLE_GPC
-
-/****/
-
-/* [ Super Nintendo ----------------------------------------------- ]
-*/
-
-#define ENABLE_SNES
 
 /****/
 
@@ -400,51 +355,6 @@ also needs ENABLE_FLASH8 and ENABLE_FLASH16 to be enabled
 
 /*==== FIRMWARE OPTIONS ===========================================*/
 
-/* [ Config File -------------------------------------------------- ]
-    Allow changing some configuration values via a config file. You
-    generally can only use the config to set options or disable
-    certain featuress. It cannot be used to toggle firmware options
-    on, only off.
-
-    Note For Developers: See OSCR.* for info.
-
-    Filename: config.txt
-*/
-
-//#define ENABLE_CONFIG
-
-/****/
-
-/* [ LCD: Background Color ---------------------------------------- ]
-    Set the backlight color of the LCD if you have one.
-
-    Can be set using config:
-      lcd.confColor=1
-      lcd.red=0
-      lcd.green=0
-      lcd.blue=0
-
-    PARAMETERS:
-      Green, Red, Blue
-*/
-
-#define OPTION_LCD_BG_COLOR 100, 0, 0
-
-/****/
-
-/* [ 3.3V Stability Fix (3V3FIX) ---------------------------------- ]
-    Enable this if you are having stability issues when using 3.3V,
-    works best with VSELECT.
-
-    If not using VSELECT, always turn the cart reader on with the
-    voltage switch set to 5V and switch to 5V before selecting a
-    cartridge from the menu.
-*/
-
-//#define ENABLE_3V3FIX
-
-/****/
-
 /* [ Updater ------------------------------------------------------ ]
     Disable this if you don't plan to/want to use the firmware
     updater utility. This setting is ignored on hardware versions
@@ -471,18 +381,6 @@ also needs ENABLE_FLASH8 and ENABLE_FLASH16 to be enabled
 */
 
 #define ENABLE_GLOBAL_LOG
-
-/****/
-
-/* [ RTC: IC Type ------------------------------------------------- ]
-    When the RTC module is installed, choose the type here. This
-    setting is ignored if the RTC option is not enabled.
-*/
-
-#define DS3231
-//#define DS1307
-
-/****/
 
 /* [ SNES Core/CLOCKGEN: Read Clock Generator Calibration Data ---- ]
     Toggle clock calibration menu and whether or not to use calibration data from snes_clk.txt
@@ -547,13 +445,6 @@ also needs ENABLE_FLASH8 and ENABLE_FLASH16 to be enabled
 
 /****/
 
-/* [ Filebrowser: Sort direction ---------------------------------- ]
-    Enable to sort files/folders from newest to oldest
-*/
-
-//#define OPTION_REVERSE_SORT
-
-/****/
 
 /*==== PROCESSING =================================================*/
 

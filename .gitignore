@@ -36,3 +36,10 @@ fp-info-cache
 # ODS files
 .~lock*
 /.vs
+
+# PlatformIO
+.pio/
+.venv/
+
+# VS Code
+.vscode/
